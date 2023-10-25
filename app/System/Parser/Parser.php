@@ -4,7 +4,12 @@ namespace App\System\Parser;
 
 class Parser
 {
-    public function parseLink($link)
+    /**
+     * Метод для получения данных с сайта bills.ru
+     * @param string $link
+     * @return bool|string
+     */
+    public function parseLink(string $link): bool|string
     {
         try {
             $ch = curl_init();
@@ -23,7 +28,12 @@ class Parser
         return $result;
     }
 
-    public function read($link)
+    /**
+     * Иницализация метода parseLink, полученние данных с сайта bills.ru
+     * @param string $link
+     * @return bool|string
+     */
+    public function read(string $link): bool|string
     {
        return $this->parseLink($link);
     }

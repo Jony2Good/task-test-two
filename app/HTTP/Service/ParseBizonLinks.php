@@ -7,9 +7,16 @@ use App\HTTP\Service\DateFormat;
 
 class ParseBizonLinks
 {
+    /**
+     * @var array<string>
+     */
     public static array $list;
 
-    public static function create(string $page)
+    /**
+     * @param string $page
+     * @return array<string>
+     */
+    public static function create(string $page): array
     {
         $array = [];
         $hrefs = explode('bizon_api_news_row', $page);

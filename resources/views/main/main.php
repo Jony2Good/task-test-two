@@ -28,27 +28,22 @@
     </nav>
     <header class="main bg-light text-white text-center">
         <div class="container">
-            <div class="d-flex align-items-center flex-column">
-                <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..."/>
-                <button class="btn btn-success">Нажми меня </button>
+            <div class="d-flex align-items-center flex-column mb-4">
+                <img class="masthead-avatar mb-2" src="assets/img/avataaars.svg" alt="..."/>
+                <a href="https://krasnodar.hh.ru/resume/8f621abbff0c29e07f0039ed1f384a7977524b" class="link-primary mb-5">Ссылка на резюме</a>
+                <button class="btn btn-success js-btn">Нажми меня</button>
             </div>
+            <div class="error text-danger"></div>
+            <div class="js-table-wrapper"></div>
         </div>
     </header>
-
     <footer class="bg-dark">
         <div class="container"></div>
-        <p class="text-white text-center p-2">Произведенно в 2023 году в Краснодаре</p>
+        <p class="text-white text-center p-2">С любовью из Краснодара. 2023 г.</p>
     </footer>
-
 </div>
-
-
-
-
-
-<!-- Bootstrap core JS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<!-- Core theme JS-->
 <script src="js/scripts.js"></script>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>

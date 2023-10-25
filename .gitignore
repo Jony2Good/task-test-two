@@ -4,3 +4,4 @@ vendor
 /.idea
 .idea
 .phpstan.dist.neon
+.env

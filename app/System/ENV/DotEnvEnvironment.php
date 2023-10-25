@@ -4,7 +4,12 @@ namespace App\System\ENV;
 
 class DotEnvEnvironment
 {
-    public function load($path): void
+    /**
+     * Записывает данные в глобальный массив $_ENV из файла .env
+     * @param string $path
+     * @return void
+     */
+    public function load(string $path): void
     {
         try {
             $newPath = str_replace('public', '.env', $path);

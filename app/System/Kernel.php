@@ -7,6 +7,9 @@ use App\System\Route\RouteDispatcher;
 
 class Kernel
 {
+    /**
+     * @return void
+     */
     public static function run(): void
     {
         $requestMethod = ucfirst(strtolower($_SERVER['REQUEST_METHOD']));

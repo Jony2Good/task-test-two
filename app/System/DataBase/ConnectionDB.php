@@ -7,7 +7,11 @@ use PDOStatement;
 
 class ConnectionDB
 {
+
     public static $instance;
+    /**
+     * @var PDO
+     */
     public PDO $db;
 
     /**
@@ -15,6 +19,7 @@ class ConnectionDB
      */
     public static function getInstance(): self
     {
+        var_dump(gettype(self::$instance));
         if (self::$instance === null) {
             self::$instance = new self();
         }
@@ -31,8 +36,9 @@ class ConnectionDB
             ]);
     }
     /**
+     * Формирует запрос в базу данных
      * @param string $query
-     * @param array $params
+     * @param array<string> $params
      * @return array|null
      */
     public function select(string $query, array $params = []): ?array
@@ -41,8 +47,9 @@ class ConnectionDB
     }
 
     /**
+     * Обрабатывает входящие данные для предотвращения SQL-иньекций
      * @param string $query
-     * @param array $params
+     * @param array<string> $params
      * @return PDOStatement|false
      */
     public function query(string $query, array $params = []): PDOStatement|false
@@ -52,7 +59,13 @@ class ConnectionDB
         return $query;
     }
 
-    public function check(string $field, string $table)
+    /**
+     * Проверяет на основе поступивших данныых наличие в таблице url
+     * @param string $field
+     * @param string $table
+     * @return mixed
+     */
+    public function check(string $field, string $table): mixed
     {
         $query = $this->db->prepare("SELECT url FROM {$table} WHERE url = :url");
         $params = ['url' => $field];
@@ -60,6 +73,10 @@ class ConnectionDB
         return $query->fetch();
     }
 
+    /**
+     * Получает последнее вхождение в таблицу по id
+     * @return int
+     */
     public function lastInsertId(): int
     {
         return (int)$this->db->lastInsertId();

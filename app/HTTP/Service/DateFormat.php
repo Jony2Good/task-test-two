@@ -4,6 +4,10 @@ namespace App\HTTP\Service;
 
 class DateFormat
 {
+    /**
+     * @param string $date
+     * @return string
+     */
     public static function getMonths(string $date): string
     {
         $ruMonths = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];

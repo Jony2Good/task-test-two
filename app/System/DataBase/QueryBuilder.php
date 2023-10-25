@@ -4,8 +4,14 @@ namespace App\System\DataBase;
 
 class QueryBuilder
 {
-
+    /**
+     * @var ConnectionDB|mixed
+     */
     public ConnectionDB $db;
+
+    /**
+     * @var string
+     */
     protected string $table;
 
     public function __construct()
@@ -13,7 +19,11 @@ class QueryBuilder
         $this->db = ConnectionDB::getInstance();
     }
 
-    public function create($fields): void
+    /**
+     * @param array<string> $fields
+     * @return void
+     */
+    public function create(array $fields): void
     {
         $str = $this->getFields($fields);
         $query = "SELECT * FROM information_schema.tables WHERE  {$str[0]} = {$str[1]} LIMIT 1";
@@ -31,6 +41,10 @@ class QueryBuilder
         }
     }
 
+    /**
+     * @param array<string> $fields
+     * @return void
+     */
     public function insert(array $fields): void
     {
         $result = $this->db->check($fields['url'], $this->table);
@@ -42,15 +56,25 @@ class QueryBuilder
             $str = $this->getFields($fields);
             $query = "INSERT INTO {$this->table} ({$str[0]}) VALUES ({$str[1]})";
             $this->db->query($query, $fields);
+            http_response_code(200);
+            echo json_encode(array('message' => 'Table created successful'));
         }
     }
 
-    public function read(string $table)
+    /**
+     * @param string $table
+     * @return array<string>|false
+     */
+    public function read(string $table): false|array
     {
         $stmt = $this->db->query("SELECT * FROM {$table}");
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * @param array<string> $fields
+     * @return array<string>
+     */
     private function getFields(array $fields): array
     {
         $names = [];
@@ -63,5 +87,4 @@ class QueryBuilder
         $masksStr = implode(', ', $masks);
         return [$namesStr, $masksStr];
     }
-
 }

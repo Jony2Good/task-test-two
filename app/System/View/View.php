@@ -4,9 +4,21 @@ namespace App\System\View;
 
 class View
 {
+    /**
+     * @var string
+     */
     private static string $path;
+    /**
+     * @var array<string>|null
+     */
     private static ?array $data;
 
+    /**
+     * Подключает с помощью манипуляции с путями файл из директории resorces/views
+     * @param string $str
+     * @param array<string> $data
+     * @return string
+     */
     public static function view(string $str, array $data = []): string
     {
         self::$data = $data;
@@ -15,6 +27,10 @@ class View
         return self::getContent();
     }
 
+    /**
+     * Иницализирует запись файла в буфер для эго дальнейшего отображения
+     * @return false|string
+     */
     private static function getContent(): false|string
     {
         extract(self::$data);

@@ -7,7 +7,14 @@ use App\System\Parser\Parser;
 
 class Controller
 {
+    /**
+     * @var Parser
+     */
     protected Parser $data;
+
+    /**
+     * @var BillsRuEvents
+     */
     protected BillsRuEvents $db;
 
     public function __construct()
@@ -16,7 +23,12 @@ class Controller
         $this->db = new BillsRuEvents();
     }
 
-    public function get($link): bool|string
+    /**
+     * Получает необработанные данне с сайта bills.ru
+     * @param string $link
+     * @return bool|string
+     */
+    public function get(string $link): bool|string
     {
         return $this->data->read($link);
     }
