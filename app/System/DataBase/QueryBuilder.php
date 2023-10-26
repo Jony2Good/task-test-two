@@ -39,7 +39,7 @@ class QueryBuilder
             http_response_code(200);
             echo json_encode(array('message' => 'Table created'));
         } else {
-            http_response_code(403);
+            http_response_code(404);
             echo json_encode(array('message' => 'Table already exists'));
             die();
         }
@@ -55,7 +55,7 @@ class QueryBuilder
     {
         $result = $this->db->check($fields['url'], $this->table);
         if(!empty($result)) {
-            http_response_code(403);
+            http_response_code(404);
             echo json_encode(array('message' => 'Url already exists'));
             die();
         } else {
