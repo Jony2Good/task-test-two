@@ -20,6 +20,8 @@ class QueryBuilder
     }
 
     /**
+     * Проверяет наличие таблицы базе данных, если её нет создает таблицу,
+     * если есть выбрасывает сообщение с ошибкой в формате JSON
      * @param array<string> $fields
      * @return void
      */
@@ -28,8 +30,6 @@ class QueryBuilder
         $str = $this->getFields($fields);
         $query = "SELECT * FROM information_schema.tables WHERE  {$str[0]} = {$str[1]} LIMIT 1";
         $result = $this->db->select($query, $fields);
-        http_response_code(403);
-        echo json_encode(array('message' => 'Table already exists'));
         if (empty($result)) {
             $query = "CREATE TABLE IF NOT EXISTS {$fields['table_name']} (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY, date DATETIME NOT NULL, 
@@ -38,10 +38,16 @@ class QueryBuilder
             $this->db->query($query);
             http_response_code(200);
             echo json_encode(array('message' => 'Table created'));
+        } else {
+            http_response_code(403);
+            echo json_encode(array('message' => 'Table already exists'));
+            die();
         }
     }
 
     /**
+     * Проверяет наличие url в таблице, если нет записывает строки
+     * в противном случае выбрасывает предупреждение в формате JSON
      * @param array<string> $fields
      * @return void
      */
@@ -56,12 +62,11 @@ class QueryBuilder
             $str = $this->getFields($fields);
             $query = "INSERT INTO {$this->table} ({$str[0]}) VALUES ({$str[1]})";
             $this->db->query($query, $fields);
-            http_response_code(200);
-            echo json_encode(array('message' => 'Table created successful'));
         }
     }
 
     /**
+     * Получает все данные из таблицы
      * @param string $table
      * @return array<string>|false
      */
@@ -72,6 +77,7 @@ class QueryBuilder
     }
 
     /**
+     * Происходит обработка входящих параметром (создаются placeholders) для формирования qwery запроса к бд
      * @param array<string> $fields
      * @return array<string>
      */

@@ -14,11 +14,6 @@
       "routes/web.php"
     ]
   },
-  "require": {
-    "components/jquery": "^3.7",
-    "phpquery/phpquery": "^0.0.4",
-    "imangazaliev/didom": "^2.0"
-  },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.19",
     "phpstan/phpstan": "^1.3"

@@ -19,7 +19,6 @@ class ConnectionDB
      */
     public static function getInstance(): self
     {
-        var_dump(gettype(self::$instance));
         if (self::$instance === null) {
             self::$instance = new self();
         }

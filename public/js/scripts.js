@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(".js-btn").click(function () {
         $.ajax({
-            url: 'http://localhost/task_two/public/read',
+            url: 'http://localhost/task-test-two/public/read',
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -23,7 +23,9 @@ $(document).ready(function () {
                 })
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                $('.error').append('Ошибка в отображении данных');
+                $('.error').append('Ошибка в отображении данных').delay(3000).slideUp(200, function(){
+                    $('.error').remove();
+                });
                 console.log(textStatus, errorThrown);
             }
         });
