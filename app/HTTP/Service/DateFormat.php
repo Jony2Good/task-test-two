@@ -5,6 +5,7 @@ namespace App\HTTP\Service;
 class DateFormat
 {
     /**
+     * Манипулирование с именами месяцов, изменение формата даты
      * @param string $date
      * @return string
      */
